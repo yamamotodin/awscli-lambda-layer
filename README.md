@@ -1,42 +1,33 @@
-# AWS CLI Layer For AWS Lambda
+# AWS CLI Layer For AWS Lambda (KAI)
 
-Use AWS CLI in AWS Lambda.
+Use AWS CLI in AWS Lambda (KAI).
 
 ## Usage
 
 ### Requirements
 
 * jq
-* aws cli
+* aws cli v2
 * zip
 * tar
 
 ### Deployment
 
-1. Prepared this aws resource
-    * S3 Bucket (Upload AWS CLI)
-    * IAM Role(S3 upload)
-1. Create AWS CLI Component
-    ```bash
-    ./shell/01.build_deploy.sh [Role] [S3 Bucket] [AWS CLI Profile]
-    ```
-1. Create AWS CLI Layer
-    ```bash
-    ./shell/02.create_aws_layer.sh [S3 Bucket] [AWS CLI Profile]
-    ```
-1. Deploy use AWS CLI Layer Lambda
-    ```bash
-    ./shell/03.deploy_lambda.sh [LambdaFunctionName] [Role] [AWS CLI Profile]
-    ```
-1. Delete Unnecessary AWS Lambda
-    ```
-    ./shell/04.delete_layer_creater.sh [AWS CLI Profile]
-    ```
-1. Update lambda function code(Optional)
-    ```
-    ./shell/05.update_lambda_function.sh [LambdaFunctionName] [AWS CLI Profile]
-    ```
-1. Update lambda layer version(Optional)
-    ```
-    ./shell/06.update_lambda_layer_version.sh [LambdaFunctionName] [AWS CLI Profile]
-    ```
+1. Prepared these
+    *  awscli-v2
+    * `aws configure` conpleted
+1. How to use
+   * `sh setup.sh project_name stage_name`
+     * **one time only**
+       * build a zip for lambda-layer (Required: `Linux` and `x86_64`)
+       * build a zip for lambda-function.
+       * create S3 bucket for lambda-layer setup
+       * create role and attach policies for lambda-function
+       * create lambda-layer for awscli v2
+       * create lambda-function
+   * `sh deploy.sh project_name stage_name`
+     * **Can be executed many times**
+     * (re)build a zip for lambda-function.
+     * and deploy lambda-function
+   * Special
+     * `070.add_policy_to_role.sh role_name` you can add new policy to lambda-role

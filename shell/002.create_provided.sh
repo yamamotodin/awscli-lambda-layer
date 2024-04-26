@@ -5,11 +5,12 @@ arch=`uname -m`
 BUCKET_NAME=$1
 
 if [ -e dist/aws_cli_layer.zip ]; then
-  echo "target file dist/aws_cli_layer.zip is exists, skip."
+  echo "target file dist/aws_cli_layer.zip is exists, transfer to S3."
+  aws s3 cp dist/aws_cli_layer.zip s3://$BUCKET_NAME/
   exit
 fi
 
-if [ $os != "Linux" -o $arch != "x86_64" ];
+if [ $os != "Linux" -o $arch != "x86_64" ]; then
   echo "error: your environment is not fill for build. Required: OS=Linux and CPU=x86_64."
   echo "advice: Get aws_cli_layer.zip and put that file into dist/aws_cli_layer.zip then you can skip this shell."
   exit 1
