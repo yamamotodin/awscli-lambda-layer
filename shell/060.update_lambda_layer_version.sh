@@ -7,9 +7,7 @@ if [ $# -ne 2 ]; then
 fi
 FunctionName=$1
 Profile=$2
-rm function.zip
-zip function.zip -j ./include-aws-cli/function.sh
-aws lambda update-function-code \
+Layer=`aws lambda list-layers --profile ${Profile}  | jq -r '.[][]| select(.LayerName =="aws-cli-layer") | .LatestMatchingVersion.LayerVersionArn'`
+aws lambda update-function-configuration \
     --function-name ${FunctionName} \
-    --zip-file fileb://function.zip \
-    --profile ${Profile}
+    --layers ${Layer}

@@ -6,4 +6,4 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 Profile=$1
-aws lambda delete-function --function-name layer-creater --profile ${Profile}
+aws lambda delete-function --function-name layer-creater
