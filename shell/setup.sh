@@ -15,8 +15,9 @@ FUNCTION_NAME=${PROJECT_NAME}-${STAGE}
 cd `dirname $0`/..
 mkdir -p dist
 
-echo sh shell/001.create_role_bucket.sh $ROLE_NAME $BUCKET_NAME
-echo sh shell/002.create_provided.sh $BUCKET_NAME
-echo sh shell/020.create_aws_layer.sh $BUCKET_NAME
-echo sh shell/025.build.sh $ROLE_NAME $BUCKET_NAME
+sh shell/001.create_role_bucket.sh $ROLE_NAME $BUCKET_NAME
+sh shell/002.create_provided.sh $BUCKET_NAME
+sh shell/020.create_aws_layer.sh $BUCKET_NAME
+sh shell/025.build.sh $ROLE_NAME $BUCKET_NAME
 sh shell/030.create_lambda.sh $FUNCTION_NAME $ROLE_NAME
+sh shell/070.add_policy_to_role.sh $ROLE_NAME
