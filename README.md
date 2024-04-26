@@ -14,8 +14,8 @@ Use AWS CLI in AWS Lambda (KAI).
 ### Deployment
 
 1. Prepared these
-    *  awscli-v2
-    * `aws configure` conpleted
+    *  Install awscli-v2 
+    * `aws configure` finished
 1. How to use
    * `sh setup.sh project_name stage_name`
      * **one time only**
