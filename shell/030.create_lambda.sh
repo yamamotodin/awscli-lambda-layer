@@ -14,4 +14,4 @@ aws lambda create-function \
     --runtime provided.al2023 \
     --role arn:aws:iam::${AccountID}:role/${RoleName} \
     --layers  ${Layer} \
-    --timeout 30
+    --timeout 180
